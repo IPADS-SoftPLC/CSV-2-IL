@@ -2,6 +2,7 @@
 #define SRC_INSTRUCTION_H
 
 #include <vector>
+#include <string>
 #include "Component.h"
 using namespace std;
 
@@ -32,7 +33,77 @@ enum ISTR
     MUL,
     ST,
 };
-
+ISTR string_to_ISTR(string cmd){
+    if(cmd == "ADDP"){
+        return ADDP;
+    }
+    if(cmd == "ANB"){
+        return ANB;
+    }
+    if(cmd == "AND"){
+        return AND;
+    }
+    if(cmd == "AND_L"){
+        return AND_L;
+    }
+    if(cmd == "AND_LE,"){
+        return AND_LE,;
+    }
+    if(cmd == "AND_E"){
+        return AND_E;
+    }
+    if(cmd == "AND_G"){
+        return AND_G,;
+    }
+    if(cmd == "AND_GE"){
+        return AND_GE;
+    }
+    if(cmd == "ANDD_E"){
+        return ANDD_E;
+    }
+    if(cmd == "ANDD_GE"){
+        return ANDD_GE;
+    }
+    if(cmd == "ANDP"){
+        return ANDP;
+    }
+    if(cmd == "ANI"){
+        return ANI;
+    }
+    if(cmd == "LD"){
+        return ANDP;
+    }
+    if(cmd == "MPP"){
+        return MPP;
+    }
+    if(cmd == "MPS"){
+        return MPS;
+    }
+    if(cmd == "MRD"){
+        return MRD;
+    }
+    if(cmd == "OUT"){
+        return OUT;
+    }
+    if(cmd == "RST"){
+        return RST;
+    }
+    if(cmd == "SET"){
+        return SET;
+    }
+    if(cmd == "EQ"){
+        return EQ;
+    }
+    if(cmd == "JMPCN"){
+        return JMPCN;
+    }
+    if(cmd == "MUL"){
+        return MUL;
+    }
+    if(cmd == "ST"){
+        return ST;
+    }
+}
 class compt
 {
 public:
@@ -61,6 +132,7 @@ public:
     Instruction();
     Instruction(ISTR cmd, int lable, int jmp_lable);
     Instruction(ISTR cmd, int lable, vector<compt> comp);
+    Instruction(string cmd, vector<compt> comp);
     char get_comp_i_type_char(int i);
     int get_comp_i_index(int i);
 };
@@ -111,6 +183,13 @@ vector<compt> Instruction::get_comp()
 {
     return comp;
 }
+Instruction::Instruction(string cmd,  vector<compt> comp)
+{
+    ISTR istr_tmp = string_to_ISTR(cmd);
+    cmd = istr_tmp;
+    lable = -1;
+    comp = comp;
+}
 
 Instruction::Instruction(ISTR cmd, int lable, vector<compt> comp)
 {
@@ -140,4 +219,8 @@ ISTR Instruction::get_cmd()
 {
     return cmd;
 }
+
+
 #endif //SRC_INSTRUCTION_H
+
+
