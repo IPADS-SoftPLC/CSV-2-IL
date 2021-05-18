@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/sijinze/Desktop/softPLC/CSV-2-IL/src/Instruction.h
+vector
+-
+
+/Users/sijinze/Desktop/softPLC/CSV-2-IL/src/main.cpp
+iostream
+-
+fstream
+-
+string
+-
+sstream
+-
+vector
+-
+list
+-
+algorithm
+-
+Instruction.h
+/Users/sijinze/Desktop/softPLC/CSV-2-IL/src/Instruction.h
+
