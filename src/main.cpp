@@ -10,6 +10,23 @@
 
 using namespace std;
 list<Instruction> old_instr;
+vector<compt> comp;
+void output_list(list<Instruction> old_instr){
+   list<Instruction>::iterator iter;
+   cout<<"遍历开始"<<endl;
+    for(iter = old_instr.begin(); iter != old_instr.end() ;iter++)
+    {
+        ISTR cmd = (*iter).get_cmd();
+        vector<compt> comp = (*iter).get_comp();
+      
+        cout<<cmd<<" "<<endl;
+      
+        for(int i = 0; i<comp.size();i++)
+            cout<<iter->get_comp_i_type_char(i)<<iter->get_comp_i_index(i)<<" ";
+        cout<<endl;
+
+    }
+}
 string remove_nut(string field){
     string res = "";
     for(int i=0;i<field.size();i++)
@@ -39,32 +56,48 @@ COMPT char_to_COMPT(char target){
 }
 //Instruction(ISTR cmd, vector<compt> comp);
 //comp.push_back(compt(K, 1));
-void creat_intr(string target,string one_compt,string& instr_name,vector<compt>& comp){
+void creat_intr(string target,string one_compt,string& instr_name){
+    // cout<<target<<" "<<one_compt<<endl;
     if(target != ""){
         if(comp.size() != 0){
-            old_instr.push_back(Instruction(instr_name, comp));
+            // cout<<instr_name<<" jjj"<<endl;
+            // cout<<"uahcuey"<<endl;
+            Instruction il= Instruction(instr_name, comp);
+            ISTR cmd = il.get_cmd();
+            cout<<cmd<<endl;
+            old_instr.push_back(il);
+
             comp.clear();
         }
         instr_name = target;
+        if(one_compt == ""){
+            // cout<<"afafe"<<endl;
+            return;
+        }
+        // cout<<one_compt[0]<<" kkk"<<endl;
         COMPT compt_type = char_to_COMPT(one_compt[0]);
+        // cout<<one_compt[0]<<" k1k"<<endl;
         string compt_index = "";
         for(int i = 1; i<one_compt.length();i++)
-            compt_index = compt_index = one_compt[i];
+            compt_index = compt_index + one_compt[i];
+        // cout<<compt_type<<" "<<compt_index<<endl;
         comp.push_back(compt(compt_type,compt_index));
     }
     else{
+        if(one_compt == "")
+            return;
         COMPT compt_type = char_to_COMPT(one_compt[0]);
+        //  cout<<one_compt[0]<<" kkk"<<endl;
         string compt_index = "";
         for(int i = 1; i<one_compt.length();i++)
-            compt_index = compt_index = one_compt[i];
+            compt_index = compt_index + one_compt[i];
+        // cout<<compt_type<<" "<<compt_index<<endl;
         comp.push_back(compt(compt_type,compt_index));
     }
 
 }
 int main() {
    
-    
-
     ifstream fin("../test.csv"); //打开文件流操作
 
     string line;
@@ -105,8 +138,8 @@ int main() {
                 for(int j =0 ;j < num_MPS ; j++){
                   
                     for(int i = 0 ;i<content_MPS[j].size();i++){
-                        creat_intr(content_MPS[j][i][2],content_MPS[j][i][3],instr_name,comp);
-                        cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
+                        creat_intr(content_MPS[j][i][2],content_MPS[j][i][3],instr_name);
+                         cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
                     }
                 }
                 num_MPS_inst =0;
@@ -115,8 +148,8 @@ int main() {
             else if(target == "MPP"){
                 for(int j =0 ;j < num_MPS ; j++){
                     for(int i = 0 ;i<content_MPS[j].size();i++){
-                        creat_intr(content_MPS[j][i][2],content_MPS[j][i][3],instr_name,comp);
-                        cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
+                        creat_intr(content_MPS[j][i][2],content_MPS[j][i][3],instr_name);
+                         cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
                     }
                 }
                 
@@ -125,8 +158,8 @@ int main() {
             else if(target == "MRD"){
                 for(int j =0 ;j < num_MPS ; j++){
                     for(int i = 0 ;i<content_MPS[j].size();i++){
-                        creat_intr(content_MPS[j][i][2],content_MPS[j][i][3],instr_name,comp);
-                        cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
+                        creat_intr(content_MPS[j][i][2],content_MPS[j][i][3],instr_name);
+                         cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
                     }
                 }
             }
@@ -135,20 +168,21 @@ int main() {
                 content_MPS[num_MPS].clear();
                 content_MPS[num_MPS].push_back(fields);
                 num_MPS_inst ++ ;
-                creat_intr(fields[2],fields[3],instr_name,comp);
+                
+                creat_intr(fields[2],fields[3],instr_name);
+
                 cout<<fields[2]<<" "<<fields[3]<<endl;
             }
             else {
                 content_MPS[num_MPS].push_back(fields);
                 num_MPS_inst ++ ;
-                creat_intr(fields[2],fields[3],instr_name,comp);
+                creat_intr(fields[2],fields[3],instr_name);
                 cout<<fields[2]<<" "<<fields[3]<<endl;
             }
 
         }
-        else
-            cout<<fields[2]<<" "<<fields[3]<<endl;
     }
+    output_list(old_instr);
     return 0;
 
 }

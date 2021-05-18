@@ -3,4 +3,4 @@ project(src)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(src main.cpp Instruction.cpp Instruction.h )
+add_executable(src main.cpp Component.h Instruction.cpp Instruction.h )
