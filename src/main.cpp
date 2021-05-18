@@ -48,17 +48,14 @@ int main() {
    
     while (getline(fin, line)) {
         istringstream sin(line); 
-        
         vector<string> fields; //声明一个字符串向量
         string field;
-
         while (getline(sin, field, ',')) //将字符串流sin中的字符读入到field字符串中，以逗号为分隔符
         {
             field = remove_nut(field);
            
             fields.push_back(field); //将刚刚读取的字符串添加到向量fields中
         }
-        
         if(true){
             
             string target = fields[2];
@@ -72,7 +69,6 @@ int main() {
                         cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
                     }
                 }
-                
                 num_MPS_inst =0;
 
             }
@@ -91,11 +87,8 @@ int main() {
                         cout<<content_MPS[j][i][2]<<' '<<content_MPS[j][i][3]<<endl;
                     }
                 }
-                
-
             }
             else if(target == "LD"){
-               
                 num_MPS_inst = 0;
                 content_MPS[num_MPS].clear();
                 content_MPS[num_MPS].push_back(fields);
@@ -114,11 +107,6 @@ int main() {
         }
         else
             cout<<fields[2]<<" "<<fields[3]<<endl;
-        /*
-         *  fields[2] : 指令
-         *  fields[3] : 操作元件
-         */
-        
     }
     return 0;
 
