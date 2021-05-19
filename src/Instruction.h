@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Component.h"
+#include <iostream>
 using namespace std;
 
 enum ISTR
@@ -33,77 +34,7 @@ enum ISTR
     MUL,
     ST,
 };
-ISTR string_to_ISTR(string cmd){
-    if(cmd == "ADDP"){
-        return ADDP;
-    }
-    if(cmd == "ANB"){
-        return ANB;
-    }
-    if(cmd == "AND"){
-        return AND;
-    }
-    if(cmd == "AND_L"){
-        return AND_L;
-    }
-    if(cmd == "AND_LE,"){
-        return AND_LE,;
-    }
-    if(cmd == "AND_E"){
-        return AND_E;
-    }
-    if(cmd == "AND_G"){
-        return AND_G,;
-    }
-    if(cmd == "AND_GE"){
-        return AND_GE;
-    }
-    if(cmd == "ANDD_E"){
-        return ANDD_E;
-    }
-    if(cmd == "ANDD_GE"){
-        return ANDD_GE;
-    }
-    if(cmd == "ANDP"){
-        return ANDP;
-    }
-    if(cmd == "ANI"){
-        return ANI;
-    }
-    if(cmd == "LD"){
-        return ANDP;
-    }
-    if(cmd == "MPP"){
-        return MPP;
-    }
-    if(cmd == "MPS"){
-        return MPS;
-    }
-    if(cmd == "MRD"){
-        return MRD;
-    }
-    if(cmd == "OUT"){
-        return OUT;
-    }
-    if(cmd == "RST"){
-        return RST;
-    }
-    if(cmd == "SET"){
-        return SET;
-    }
-    if(cmd == "EQ"){
-        return EQ;
-    }
-    if(cmd == "JMPCN"){
-        return JMPCN;
-    }
-    if(cmd == "MUL"){
-        return MUL;
-    }
-    if(cmd == "ST"){
-        return ST;
-    }
-}
+
 class compt
 {
 public:
