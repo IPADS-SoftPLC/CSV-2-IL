@@ -46,7 +46,13 @@ vector<compt> Instruction::get_comp()
 {
     return comp;
 }
-
+Instruction::Instruction(string cmd,  vector<compt> comp)
+{
+    ISTR istr_tmp = string_to_ISTR(cmd);
+    cmd = istr_tmp;
+    lable = -1;
+    comp = comp;
+}
 Instruction::Instruction(ISTR cmd, int lable, vector<compt> comp)
 {
     cmd = cmd;
