@@ -154,7 +154,7 @@ Instruction::Instruction(string cmd,  vector<compt> comp)
     ISTR istr_tmp = string_to_ISTR(cmd);
     // cout<<istr_tmp<<" kkk"<<endl;
     this->cmd = istr_tmp;
-    cout<<this->cmd<<" kkk"<<endl;
+    // cout<<this->cmd<<" kkk"<<endl;
     lable = -1;
     comp = comp;
 }
