@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/src.dir/Component.cpp.obj"
+  "CMakeFiles/src.dir/Component.cpp.obj.d"
   "CMakeFiles/src.dir/Instruction.cpp.obj"
+  "CMakeFiles/src.dir/Instruction.cpp.obj.d"
   "CMakeFiles/src.dir/main.cpp.obj"
+  "CMakeFiles/src.dir/main.cpp.obj.d"
   "libsrc.dll.a"
   "src.exe"
   "src.exe.manifest"

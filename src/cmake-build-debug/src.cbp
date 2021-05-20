@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/97537/STUDY/softPLC/csv2IL/CSV-2-IL/src/Component.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="C:/Users/97537/STUDY/softPLC/csv2IL/CSV-2-IL/src/Component.h">
+			<Option target="src"/>
+		</Unit>
 		<Unit filename="C:/Users/97537/STUDY/softPLC/csv2IL/CSV-2-IL/src/Instruction.cpp">
 			<Option target="src"/>
 		</Unit>

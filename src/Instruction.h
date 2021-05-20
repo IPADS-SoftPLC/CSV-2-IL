@@ -21,11 +21,23 @@ enum ISTR
     ANDD_GE,
     ANDP,
     ANI,
+
+    /* 浮点操作 不允许分开*/
+    DECP,
+    DEDIV,
+    DEMOV,
+    DEMUL,
+    /* 浮点操作 不允许分开*/
+    DFLT,
+    FLT,
     LD,
+    LDP,
+    MEF,
+    MEP,
     MPP,
     MPS,
     MRD,
-    OUT,
+    OUT, 
     RST,
     SET,
 
@@ -33,6 +45,8 @@ enum ISTR
     JMPCN,
     MUL,
     ST,
+
+    NONE
 };
 
 class compt
@@ -40,10 +54,10 @@ class compt
 public:
     COMPT type;
     string index;
-    compt(COMPT type,string index)
+    compt(COMPT type, string index)
     {
-        type = type;
-        index = index;
+        this->type = type;
+        this->index = index;
     };
 };
 
@@ -69,5 +83,3 @@ public:
 };
 
 #endif //SRC_INSTRUCTION_H
-
-

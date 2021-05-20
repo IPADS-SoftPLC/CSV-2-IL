@@ -1,0 +1,26 @@
+PROGRAM ABC
+	VAR
+		Y014 : BOOL;
+		M15: BOOL;
+		M15_tmp: R_TRIG;
+		M160: BOOL;
+		M170: BOOL;
+		K0: BOOL:=0;
+		K1: BOOL:=1;
+	END_VAR
+
+		LD	M170
+		EQ	K1
+		JMPCN	lable0
+		LD	M15
+		ST	M15_tmp.CLK
+		CAL	M15_tmp
+		LD	M15_tmp.Q
+		EQ	K1
+		JMPCN	lable0
+		LD	K1
+		ST	Y014
+		LD	K0
+		ST	M160
+lable0:	LD	K0
+END_PROGRAM

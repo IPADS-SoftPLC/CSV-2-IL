@@ -39,7 +39,7 @@ ISTR string_to_ISTR(string cmd){
         return ANI;
     }
     if(cmd == "LD"){
-        return ANDP;
+        return LD;
     }
     if(cmd == "MPP"){
         return MPP;
@@ -49,6 +49,12 @@ ISTR string_to_ISTR(string cmd){
     }
     if(cmd == "MRD"){
         return MRD;
+    }
+    if(cmd == "MEF"){
+        return MEF;
+    }
+     if(cmd == "MEP"){
+        return MEP;
     }
     if(cmd == "OUT"){
         return OUT;
@@ -71,16 +77,27 @@ ISTR string_to_ISTR(string cmd){
     if(cmd == "ST"){
         return ST;
     }
+    if(cmd == "ANDP")
+    {
+        return ANDP;
+    }
+    if(cmd == "MEP")
+    {
+        return MEP;
+    }
+    return NONE;
 }
 
 string Instruction::get_comp_i_index(int i)
 {
-    return comp[i].index;
+    // cout<<"comp_index"<<this->comp[i].index<<endl;
+    return this->comp[i].index;
 }
 
 char Instruction::get_comp_i_type_char(int i)
 {
     COMPT c = comp[i].type;
+    // cout<<"comp_i_type"<<c<<endl;
     char res = 'K';
     switch (c)
     {
@@ -119,30 +136,24 @@ vector<compt> Instruction::get_comp()
 {
     return comp;
 }
-Instruction::Instruction(string cmd,  vector<compt> comp)
-{
-    ISTR istr_tmp = string_to_ISTR(cmd);
-    cmd = istr_tmp;
-    lable = -1;
-    comp = comp;
-}
+
 Instruction::Instruction(ISTR cmd, int lable, vector<compt> comp)
 {
-    cmd = cmd;
-    lable = lable;
-    comp = comp;
+    this->cmd = cmd;
+    this->lable = lable;
+    this->comp = comp;
 }
 Instruction::Instruction(ISTR cmd, int lable, int jmp_lable)
 {
-    cmd = cmd;
-    lable = lable;
-    jmp_lable = jmp_lable;
+    this->cmd = cmd;
+    this->lable = lable;
+    this->jmp_lable = jmp_lable;
 }
 
 Instruction::Instruction()
 {
-    lable = -1;
-    jmp_lable = -1;
+    this->lable = -1;
+    this->jmp_lable = -1;
 }
 
 COMPT Instruction::get_comp_i_type(int index)
@@ -160,7 +171,7 @@ Instruction::Instruction(string cmd,  vector<compt> comp)
     ISTR istr_tmp = string_to_ISTR(cmd);
     // cout<<istr_tmp<<" kkk"<<endl;
     this->cmd = istr_tmp;
-    cout<<this->cmd<<" kkk"<<endl;
-    lable = -1;
-    comp = comp;
+    // cout<<this->cmd<<" kkk"<<endl;
+    this->lable = -1;
+    this->comp = comp;
 }
