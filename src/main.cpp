@@ -64,15 +64,23 @@ void add_var(Component &var, Instruction &instr);
 bool is_cmd_de(ISTR cmd);
 TYPE get_type(COMPT comp);
 
-void creat_intr(string target, string one_compt, string &instr_name)
-{
-    if (target != "")
-    {
-        if (comp.size() != 0)
-        {
-            Instruction il = Instruction(instr_name, comp);
+bool is_output(string target){
+    if(target == "out" || target == "SET"|| target == "RST")
+        return true;
+}
+
+
+//Instruction(ISTR cmd, vector<compt> comp);
+//comp.push_back(compt(K, 1));
+void creat_intr(string target,string one_compt,string& instr_name){
+    // cout<<target<<" "<<one_compt<<endl;
+    if(target != ""){
+        if(instr_name != ""){
+            // cout<<instr_name<<" jjj"<<endl;
+            // cout<<"uahcuey"<<endl;
+            Instruction il= Instruction(instr_name, comp);
             ISTR cmd = il.get_cmd();
-            cout << cmd << endl;
+            // cout<<cmd<<endl;
             old_instr.push_back(il);
 
             /*  更新变量  */
@@ -115,8 +123,8 @@ int main()
     int num_MPS = 0;
     int num_MPS_inst = 0;
     vector<compt> comp;
-    string instr_name;
-    vector<vector<vector<string>>> content_MPS(10);
+    string instr_name = "";
+    vector<vector< vector<string> > > content_MPS(10);
     for (int n = 0; n < 10; n++)
     {
         content_MPS[n].resize(10);
@@ -195,12 +203,16 @@ int main()
 
                 cout << fields[2] << " " << fields[3] << endl;
             }
-            else
-            {
-                content_MPS[num_MPS].push_back(fields);
-                num_MPS_inst++;
-                creat_intr(fields[2], fields[3], instr_name);
-                cout << fields[2] << " " << fields[3] << endl;
+            else {
+                
+                creat_intr(fields[2],fields[3],instr_name);
+                if(is_output(fields[2]))
+                    cout<<fields[2]<<" "<<fields[3]<<endl;
+                else{
+                    content_MPS[num_MPS].push_back(fields);
+                    num_MPS_inst ++ ;
+                    cout<<fields[2]<<" "<<fields[3]<<endl;
+                }
             }
         }
     }
