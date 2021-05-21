@@ -64,21 +64,24 @@ void add_var(Component &var, Instruction &instr);
 bool is_cmd_de(ISTR cmd);
 TYPE get_type(COMPT comp);
 
-bool is_output(string target){
-    if(target == "out" || target == "SET"|| target == "RST")
+bool is_output(string target)
+{
+    if (target == "out" || target == "SET" || target == "RST")
         return true;
 }
 
-
 //Instruction(ISTR cmd, vector<compt> comp);
 //comp.push_back(compt(K, 1));
-void creat_intr(string target,string one_compt,string& instr_name){
+void creat_intr(string target, string one_compt, string &instr_name)
+{
     // cout<<target<<" "<<one_compt<<endl;
-    if(target != ""){
-        if(instr_name != ""){
+    if (target != "")
+    {
+        if (instr_name != "")
+        {
             // cout<<instr_name<<" jjj"<<endl;
             // cout<<"uahcuey"<<endl;
-            Instruction il= Instruction(instr_name, comp);
+            Instruction il = Instruction(instr_name, comp);
             ISTR cmd = il.get_cmd();
             // cout<<cmd<<endl;
             old_instr.push_back(il);
@@ -124,7 +127,7 @@ int main()
     int num_MPS_inst = 0;
     vector<compt> comp;
     string instr_name = "";
-    vector<vector< vector<string> > > content_MPS(10);
+    vector<vector<vector<string>>> content_MPS(10);
     for (int n = 0; n < 10; n++)
     {
         content_MPS[n].resize(10);
@@ -203,15 +206,17 @@ int main()
 
                 cout << fields[2] << " " << fields[3] << endl;
             }
-            else {
-                
-                creat_intr(fields[2],fields[3],instr_name);
-                if(is_output(fields[2]))
-                    cout<<fields[2]<<" "<<fields[3]<<endl;
-                else{
+            else
+            {
+
+                creat_intr(fields[2], fields[3], instr_name);
+                if (is_output(fields[2]))
+                    cout << fields[2] << " " << fields[3] << endl;
+                else
+                {
                     content_MPS[num_MPS].push_back(fields);
-                    num_MPS_inst ++ ;
-                    cout<<fields[2]<<" "<<fields[3]<<endl;
+                    num_MPS_inst++;
+                    cout << fields[2] << " " << fields[3] << endl;
                 }
             }
         }
@@ -222,19 +227,19 @@ int main()
     outfile << "PROGRAM ABC" << endl;
     // output_list(old_instr);
     // cout << "[RESULT]:new instruction list" << endl;
-    var.add_compt(K,BOOL,"0");
-    var.add_compt(K,BOOL,"1");
+    var.add_compt(K, INT, "0");
+    var.add_compt(K, INT, "1");
     // var.add_compt(K,BOOL,"1_BOOL");
     var.output_var_to_file(outfile);
     csv_to_il(outfile);
-    outfile<<"END_PROGRAM"<<endl;
+    outfile << "END_PROGRAM" << endl;
     outfile.close();
     return 0;
 }
 
 void csv_to_il(ofstream &outfile)
 {
-    
+
     int lable = 0; // 先给jump用了 等下一句要用lable的指令用完了再加加
     bool lable_flag = 0;
     bool new_line = 0; // 如果下一句指令是新行 则置为true  OUT等特定指令的下一句就是new_line
@@ -276,7 +281,7 @@ void csv_to_il(ofstream &outfile)
             // }
             // else
             // {
-                outfile << "\t\tLD\tK" << 1 << endl;
+            outfile << "\t\tLD\tK" << 1 << endl;
             // }
             outfile << "\t\tST\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
 
@@ -294,7 +299,7 @@ void csv_to_il(ofstream &outfile)
             // }
             // else
             // {
-                outfile << "\t\tLD\tK" << 0 << endl;
+            outfile << "\t\tLD\tK" << 0 << endl;
             // }
             outfile << "\t\tST\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
 
@@ -324,10 +329,12 @@ void csv_to_il(ofstream &outfile)
             tmp = "M" + (*it).get_comp_i_index(0) + "_tmp";
             outfile << "\t\tLD\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
             // var.add_compt( (*it).get_comp_i_type(0),R_TRIG,(*it).get_comp_i_index(0)+"_tmp");
+            outfile << "\t\tINT_TO_BOOL" << endl;
             outfile << "\t\tST\t" << tmp << ".CLK" << endl;
             outfile << "\t\tCAL\t" << tmp << endl;
             outfile << "\t\tLD\t" << tmp << ".Q" << endl;
-            outfile << "\t\tEQ\tK1"  << endl;
+            outfile << "\t\tBOOL_TO_INT" << endl;
+            outfile << "\t\tEQ\tK1" << endl;
             outfile << "\t\tJMPCN\tlable" << lable << endl;
             lable_flag = true;
 
@@ -415,7 +422,7 @@ TYPE get_type(COMPT comp)
     case X:
     case Y:
     case M:
-        return BOOL;
+        return INT;
         break;
 
     default:

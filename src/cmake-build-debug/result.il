@@ -1,26 +1,35 @@
 PROGRAM ABC
 	VAR
-		Y014 : BOOL;
-		M15: BOOL;
+		Y014 : INT;
+		M15: INT;
 		M15_tmp: R_TRIG;
-		M160: BOOL;
-		M170: BOOL;
-		K0: BOOL:=0;
-		K1: BOOL:=1;
+		M16: INT;
+		M16_tmp: R_TRIG;
+		K0: INT:=0;
+		K1: INT:=1;
 	END_VAR
 
-		LD	M170
-		EQ	K1
-		JMPCN	lable0
 		LD	M15
+		INT_TO_BOOL
 		ST	M15_tmp.CLK
 		CAL	M15_tmp
 		LD	M15_tmp.Q
+		BOOL_TO_INT
 		EQ	K1
 		JMPCN	lable0
 		LD	K1
 		ST	Y014
 		LD	K0
-		ST	M160
+		ST	Y014
+		LD	M16
+		INT_TO_BOOL
+		ST	M16_tmp.CLK
+		CAL	M16_tmp
+		LD	M16_tmp.Q
+		BOOL_TO_INT
+		EQ	K1
+		JMPCN	lable0
+		LD	K0
+		ST	Y014
 lable0:	LD	K0
 END_PROGRAM
