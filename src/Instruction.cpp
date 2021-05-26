@@ -41,6 +41,9 @@ ISTR string_to_ISTR(string cmd){
     if(cmd == "LD"){
         return LD;
     }
+    if(cmd == "LDP"){
+        return LDP;
+    }
     if(cmd == "MPP"){
         return MPP;
     }

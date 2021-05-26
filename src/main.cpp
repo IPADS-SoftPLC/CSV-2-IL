@@ -68,6 +68,7 @@ bool is_output(string target)
 {
     if (target == "out" || target == "SET" || target == "RST")
         return true;
+    return false;
 }
 
 //Instruction(ISTR cmd, vector<compt> comp);
@@ -271,18 +272,38 @@ void csv_to_il(ofstream &outfile)
             lable_flag = true;
 
             break;
+        case LDP:
+            /* 相当于 AND lDP */
+            tmp = "M" + (*it).get_comp_i_index(0) + "_tmp";
+            if (lable_flag && new_line)
+            {
+                outfile << "lable" << lable << ":"
+                         << "\tLD\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
+                lable++;
+                lable_flag = false;
+                new_line = false;
+            }
+            else
+            {
+                outfile << "\t\tLD\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
+            }
+           
+            // outfile << "\t\tLD\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
+            // var.add_compt( (*it).get_comp_i_type(0),R_TRIG,(*it).get_comp_i_index(0)+"_tmp");
+            outfile << "\t\tINT_TO_BOOL" << endl;
+            outfile << "\t\tST\t" << tmp << ".CLK" << endl;
+            outfile << "\t\tCAL\t" << tmp << endl;
+            outfile << "\t\tLD\t" << tmp << ".Q" << endl;
+            outfile << "\t\tBOOL_TO_INT" << endl;
+            outfile << "\t\tEQ\tK1" << endl;
+            outfile << "\t\tJMPCN\tlable" << lable << endl;
+            lable_flag = true;
+
+            break;
+
         case SET:
-            // if (lable_flag && new_line)
-            // {
-            //     outfile << "lable" << lable << ":"
-            //             << "\tLD\tK" << 1 << endl;
-            //     lable++;
-            //     lable_flag = false;
-            // }
-            // else
-            // {
+           
             outfile << "\t\tLD\tK" << 1 << endl;
-            // }
             outfile << "\t\tST\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
 
             new_line = true;
@@ -290,17 +311,7 @@ void csv_to_il(ofstream &outfile)
 
         case RST:
 
-            // if (lable_flag && new_line)
-            // {
-            //     outfile << "lable" << lable << ":"
-            //             << "\tLD\tK" << 0 << endl;
-            //     lable++;
-            //     lable_flag = false;
-            // }
-            // else
-            // {
             outfile << "\t\tLD\tK" << 0 << endl;
-            // }
             outfile << "\t\tST\t" << (*it).get_comp_i_type_char(0) << (*it).get_comp_i_index(0) << endl;
 
             new_line = true;

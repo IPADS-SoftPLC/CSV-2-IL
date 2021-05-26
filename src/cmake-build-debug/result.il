@@ -22,17 +22,17 @@ PROGRAM ABC
 		ST	Y014
 		LD	K0
 		ST	M160
-		LD	M16
+lable0:	LD	M16
 		INT_TO_BOOL
 		ST	M16_tmp.CLK
 		CAL	M16_tmp
 		LD	M16_tmp.Q
 		BOOL_TO_INT
 		EQ	K1
-		JMPCN	lable0
+		JMPCN	lable1
 		LD	K0
 		ST	Y014
 		LD	K1
 		ST	M160
-lable0:	LD	K0
+lable1:	LD	K0
 END_PROGRAM
