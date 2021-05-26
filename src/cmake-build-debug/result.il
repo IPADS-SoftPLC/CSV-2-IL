@@ -4,6 +4,7 @@ PROGRAM ABC
 		M15: INT;
 		M15_tmp: R_TRIG;
 		M16: INT;
+		M160: INT;
 		M16_tmp: R_TRIG;
 		K0: INT:=0;
 		K1: INT:=1;
@@ -20,7 +21,7 @@ PROGRAM ABC
 		LD	K1
 		ST	Y014
 		LD	K0
-		ST	Y014
+		ST	M160
 		LD	M16
 		INT_TO_BOOL
 		ST	M16_tmp.CLK
@@ -31,5 +32,7 @@ PROGRAM ABC
 		JMPCN	lable0
 		LD	K0
 		ST	Y014
+		LD	K1
+		ST	M160
 lable0:	LD	K0
 END_PROGRAM
